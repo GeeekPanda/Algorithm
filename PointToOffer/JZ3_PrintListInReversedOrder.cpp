@@ -13,9 +13,9 @@ std::vector<int> printListInReversedOrder(ListNode* head){
     }
     while (!stk.empty())
     {
-        ListNode* n = stk.top();
+        curNode = stk.top();
         stk.pop();
-        res.push_back(n->val);
+        res.push_back(curNode->val);
     }
     
     return res;
