@@ -9,14 +9,8 @@
 TreeNode* Mirror(TreeNode* pRoot){
     if(pRoot == nullptr)
         return nullptr;
-    if(!pRoot->left && !pRoot->right)
-        return pRoot;
     TreeNode* pTemp = pRoot->left;
-    pRoot->left = pRoot->right;
-    pRoot->right = pTemp;
-
-    if(pRoot->left)
-        Mirror(pRoot->left);
-    if(pRoot->right)
-        Mirror(pRoot->right);
+    pRoot->left = Mirror(pRoot->right);
+    pRoot->right = Mirror(pTemp);
+    return pRoot;
 }
