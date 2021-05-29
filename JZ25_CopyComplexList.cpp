@@ -15,8 +15,6 @@
 
 */
 
-
-
 /*
 struct RandomListNode {
     int label;
@@ -27,18 +25,6 @@ struct RandomListNode {
 };
 */
 
-/*
-    if (oriNode->random == nullptr){
-        if(curNode->next)
-            curNode = curNode->next->next;
-        oriNode = oriNode->next->next;
-        continue;
-    }
-    curNode->random = oriNode->random->next;
-    if (curNode->next)
-        curNode = curNode->next->next;
-    oriNode = oriNode->next->next;
-*/
 RandomListNode* Clone(RandomListNode* pHead){
     if(pHead == nullptr)
         return nullptr;
