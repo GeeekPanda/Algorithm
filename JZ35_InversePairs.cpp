@@ -11,54 +11,42 @@
         意味着「左子数组当前元素 至 末尾元素」 与「右子数组当前元素」构成了若干「逆序对」 。
 */
 
-
 class Solution {
-private:
-    const int kmod = 1000000007;
 public:
     int InversePairs(vector<int> data) {
         int ret = 0;
-        // 在最外层开辟数组
         vector<int> tmp(data.size());
         mergeSort(data, tmp, 0, data.size() - 1, ret);
         return ret;
     }
-
-    void mergeSort(vector<int> &arr, vector<int> &tmp, int l, int r, int &ret) {
-        if (l >= r) {
+private:
+    const int kmod = 1000000007;
+    void mergeSort(vector<int> &arr, vector<int> &tmp, int left, int right, int &ret) {
+        if (left >= right)
             return;
-        }
-
-        int mid = l + ((r - l) >> 1);
-        mergeSort(arr, tmp, l, mid, ret);
-        mergeSort(arr, tmp, mid + 1, r, ret);
-        merge(arr, tmp, l, mid, r, ret);
+        int mid = left + ((right - left) >> 1);
+        mergeSort(arr, tmp, left, mid, ret);
+        mergeSort(arr, tmp, mid + 1, right, ret);
+        merge(arr, tmp, left, mid, right, ret);
     }
-
-    void merge(vector<int> &arr, vector<int> &tmp, int l, int mid, int r, int &ret) {
-        int i = l, j = mid + 1, k = 0;
-
-        while (i <= mid && j <= r) {
+    void merge(vector<int> &arr, vector<int> &tmp, int left, int mid, int right, int &ret) {
+        int i = left; 
+        int j = mid + 1;
+        int k = 0;
+        while (i <= mid && j <= right) {
             if (arr[i] > arr[j]) {
                 tmp[k++] = arr[j++];
                 ret += (mid - i + 1);
                 ret %= kmod;
             }
-            else {
+            else 
                 tmp[k++] = arr[i++];
-            }
         }
-
-        while (i <= mid) {
+        while (i <= mid) 
             tmp[k++] = arr[i++];
-        }
-        while (j <= r) {
+        while (j <= right) 
             tmp[k++] = arr[j++];
-        }
-
-        for (k = 0, i = l; i <= r; ++i, ++k) {
+        for (k = 0, i = left; i <= right; ++i, ++k) 
             arr[i] = tmp[k];
-        }
     }
-
 };
