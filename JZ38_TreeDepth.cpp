@@ -8,9 +8,9 @@
         即 TreeDepth = max(LeftSubTreeDepth, RightSubTreeDepth) + 1;
 */
 
-class Solution {
-public:
-    int TreeDepth(TreeNode* pRoot) {
-    
-    }
-};
+
+int TreeDepth(TreeNode* pRoot) {
+    if(pRoot == nullptr)
+        return 0;
+    return max(TreeDepth(pRoot->left), TreeDepth(pRoot->right)) + 1;
+}
