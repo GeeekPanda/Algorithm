@@ -9,17 +9,16 @@
 
 vector<int> multiply(const vector<int>& A){
     const int size = A.size();
-    vector<int> B(size, 1);
     if(size == 0)
-        return B;
-    int left = 1;
-    int right = 1;
-    for(int i = 0; i < size; ++i){
-        B[i] *= left;
-        left *= A[i];
-
-        B[size-i-1] *= right;
-        right *= A[size-i-1];
+        return {};
+    vector<int> B(size);
+    B[0] = 1;
+    int temp = 1;
+    for(int i = 1; i < size; ++i)
+        B[i] = B[i-1] * A[i-1];
+    for(int i = size-2; i >= 0; --i){
+        temp *= A[i+1];
+        B[i] *= temp;
     }
     return B;
 }
