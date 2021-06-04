@@ -35,21 +35,19 @@ private:
             }
             return true;
         }
+
         bool res = false;
         if(str[i] == pattern[j] || pattern[j] == '.'){
-            if(j < ptn_size - 1 && pattern[j+1] == '*'){
+            if(j < ptn_size - 1 && pattern[j+1] == '*')
                 res = dp(str, i, pattern, j+2) || dp(str, i+1, pattern, j);
-            }
             else
                 res = dp(str, i+1, pattern, j+1);
         }
         else{
-            if(j < ptn_size - 1 && pattern[j+1] == '*'){
+            if(j < ptn_size - 1 && pattern[j+1] == '*')
                 res = dp(str, i, pattern, j+2);
-            }
-            else{
+            else
                 return false;
-            }
         }
         return res;
     }
