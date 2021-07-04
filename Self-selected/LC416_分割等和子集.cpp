@@ -22,5 +22,6 @@ public:
         if(sum & 1)    return false;
         int target = sum / 2;
         if(max > target)    return false;
+        std::vector<std::vector<int>> dp(size, target+1);
     }
 };
