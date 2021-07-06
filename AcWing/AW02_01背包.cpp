@@ -17,38 +17,41 @@
             2 4
             3 4
             4 5
-        输出样例：
+        输出样例
             8
+    
+    思路：
+        动态规划。
 */
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
 
-int GetMaxWorth(const std::vector<std::vector<int> > vec, const int volume){
-    const int rows = vec.size();
-    std::vector<std::vector<int> > dp(rows, std::vector<int>(volume+1, 0));
-    for(int i = 1; i < rows; ++i){
-        for(int j = 1; j <= volume; ++j){
-            if(j < vec[i][0])
+int GetMaxWorth(const std::vector<std::vector<int> > para_goods_info, const int para_bag_volume){
+    const int goods_num = para_goods_info.size() - 1;
+    std::vector<std::vector<int> > dp(goods_num+1, std::vector<int>(para_bag_volume+1, 0));
+    for(int i = 1; i <= goods_num; ++i){
+        for(int j = 1; j <= para_bag_volume; ++j){
+            if(j < para_goods_info[i][0])
                 dp[i][j] = dp[i-1][j];
             else
-                dp[i][j] = std::max(dp[i-1][j], dp[i-1][j-vec[i][0]] + vec[i][1]);
+                dp[i][j] = std::max(dp[i-1][j], para_goods_info[i][1]+dp[i-1][j-para_goods_info[i][0]]);
         }
     }
-    return dp[rows-1][volume];
+    return dp[goods_num][para_bag_volume];
 }
 
 int main(){
-    int nums = 0;
-    int volume = 0;
-    std::cin >> nums >> volume;
-    std::vector<std::vector<int> > vec(nums+1, std::vector<int>(2, 0));
-    for(int i = 1; i <= nums; ++i){
-        for(int j = 0; j < 2; ++j)
-            std::cin >> vec[i][j];
+    int N = 0;
+    int V = 0;
+    std::cin >> N >> V;
+    std::vector<std::vector<int> > goods_info(N+1, std::vector<int>(2, 0));
+    for(int i = 1; i <= N; ++i){
+        for(int j = 0; j < 2; ++j){
+            std::cin >> goods_info[i][j];
+        }
     }
-    std::cout << GetMaxWorth(vec, volume) << std::endl;
-
+    std::cout << GetMaxWorth(goods_info, V) << std::endl;
     return 0;
 }
