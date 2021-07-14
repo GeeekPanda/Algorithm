@@ -15,7 +15,8 @@
 class Solution {
 public:
     int rob(TreeNode* root) {
-        
+        dfs(root);
+        return max(selected[root], unselected[root]);
     }
 private:
     std::unordered_map<TreeNode*, int> selected;
@@ -27,6 +28,8 @@ private:
         }
         dfs(node->left);
         dfs(node->right);
-        selected[node] = node->val + 
+        selected[node] = node->val + unselected[node->left] + unselected[node->right];
+        unselected[node] = max(selected[node->left], unselected[node->left]) +
+                           max(selected[node->right], unselected[node->right]);
     }
 };
