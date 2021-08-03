@@ -6,7 +6,6 @@
         请找出数组中任意一个重复的数字。
 */
 
-
 //法一：哈希表
 class Solution {
 public:
