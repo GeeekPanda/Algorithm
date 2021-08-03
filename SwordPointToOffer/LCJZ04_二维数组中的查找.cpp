@@ -7,15 +7,13 @@
 class Solution {
 public:
     bool findNumberIn2DArray(vector<vector<int>>& matrix, int target) {
-        const int n = matrix.size();
-        const int m = matrix[0].size();
-        int i = 0;
-        int j = m-1;
-        while(i < n && j >= 0){
+        int i = matrix.size() - 1;
+        int j = 0;
+        while(i >= 0 && j < matrix[0].size()){
             if(matrix[i][j] > target)
-                --j;
+                --i;
             else if(matrix[i][j] < target)
-                ++i;
+                ++j;
             else
                 return true;
         }
